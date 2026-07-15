@@ -1,0 +1,16 @@
+# MINUT reproducibility — Python dependencies
+# Core (MINUT transform + evaluation): required
+numpy>=1.23
+pandas>=1.5
+pyteomics>=4.6
+scikit-learn>=1.2
+numba>=0.57            # optional but recommended (accelerates the binning; identical results)
+
+# Reference peak-picker baselines (section 2): optional
+pyopenms==3.5.0            # FeatureFinderMetabo (FFM) - version used in the paper
+asari-metabolomics==1.17.0 # asari - version used in the paper
+
+# XCMS baseline is R-based (not a Python package):
+#   install R >= 4.3 and, in R:
+#     if (!require("BiocManager")) install.packages("BiocManager")
+#     BiocManager::install(c("xcms", "MsExperiment", "BiocParallel"))
