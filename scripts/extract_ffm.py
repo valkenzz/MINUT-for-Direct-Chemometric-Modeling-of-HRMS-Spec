@@ -7,7 +7,7 @@ then a simple grid alignment (per (m/z, RT) tile, MAX intensity across samples).
 Usage:
     python extract_ffm.py --dataset <covid|lung|milk> --manifest <manifest.csv>
 
-Paths are environment-driven (no hard-coded locations):
+Paths are environment-driven:
     MINUT_FEATURES_DIR   output dir for <dataset>_ffm.csv   (default: outputs/features)
     MINUT_DATA_DIR       root that holds the raw files       (default: data)
 Manifest columns: sample_name, file_path, label. `file_path` may be an absolute

@@ -2,7 +2,7 @@
 
 This folder contains everything needed to reproduce the results of the MINUT paper.
 The MINUT method itself is implemented **inline** in the notebook (plain NumPy + optional
-Numba) — there is **no dependency on any proprietary software** and **no machine-specific path**.
+Numba).
 
 ## Contents
 
@@ -47,8 +47,8 @@ The XCMS baseline additionally needs R ≥ 4.3 with `xcms`, `MsExperiment`, `Bio
 
 | Dataset | Repository | Notes |
 |---------|-----------|-------|
-| COVID-19 plasma | MetaboLights **MTBLS2291** | UPLC-HRMS (`.mzXML`) |
-| Lung cancer / TB serum | MetaboLights **MTBLS6990** | UPLC-Q-TOF (`.mzML`) |
+| COVID-19 plasma | MetaboLights [**MTBLS2291**](https://www.ebi.ac.uk/metabolights/MTBLS2291) | UPLC-HRMS (`.mzXML`) |
+| Lung cancer / TB serum | MetaboLights [**MTBLS6990**](https://www.ebi.ac.uk/metabolights/MTBLS6990) | UPLC-Q-TOF (`.mzML`) |
 | Milk (organic vs conventional) | private (TOFOO project) | not publicly available |
 
 Download the raw files and put them in a single folder, then point the pipeline to it:
@@ -100,7 +100,9 @@ lung / Silybin, COVID-19 / C19-sphingosine & valine) starting from the MINUT fea
 subfolder holds its notebook (`CaseStudy/milk/MilkCaseStudy.ipynb`,
 `CaseStudy/lung/LungCancer.ipynb`, `CaseStudy/covid/Covid.ipynb`) alongside its bundled MINUT
 feature files. The milk study runs out of the box; the lung study additionally needs the
-public MTBLS6990 ISA metadata files.
+public [MTBLS6990](https://www.ebi.ac.uk/metabolights/MTBLS6990) ISA metadata files
+(`s_MTBLS6990.txt` and `a_MTBLS6990_LC-MS_untargeted_positive_reverse-phase_metabolite_profiling.txt`),
+resolved under `MINUT_DATA_DIR` (same environment variable as section 2).
 
 ## 5. Reproducibility notes
 

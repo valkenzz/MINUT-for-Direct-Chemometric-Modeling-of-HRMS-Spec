@@ -4,7 +4,7 @@
 #
 # Usage:  Rscript extract_xcms.R <dataset> <manifest.csv>
 #
-# Environment-driven paths (no hard-coded locations):
+# Environment-driven paths:
 #   MINUT_FEATURES_DIR   output dir (default: outputs/features)
 #   MINUT_DATA_DIR       root that holds the raw files (default: data)
 # Manifest columns: sample_name, file_path, label. `file_path` may be absolute

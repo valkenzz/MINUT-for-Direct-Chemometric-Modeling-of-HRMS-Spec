@@ -6,7 +6,7 @@ asari requires .mzML input; .mzXML is auto-converted via pyOpenMS.
 Usage:
     python extract_asari.py --dataset <covid|lung|milk> --manifest <manifest.csv>
 
-Environment-driven paths (no hard-coded locations):
+Environment-driven paths:
     MINUT_FEATURES_DIR   output dir for <dataset>_asari.csv  (default: outputs/features)
     MINUT_DATA_DIR       root that holds the raw files        (default: data)
     MINUT_WORK_DIR       scratch dir for asari staging/output (default: system temp)
