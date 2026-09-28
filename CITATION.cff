@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Meo"
+    given-names: "Valentin"
+  - family-names: "Gauriat"
+    given-names: "Bénédicte"
+  - family-names: "Garnier"
+    given-names: "Jean-François"
+  - family-names: "Bertrand"
+    given-names: "Dominique"
+  - family-names: "Tsamba"
+    given-names: "Lucie"
+  - family-names: "Cordella"
+    given-names: "Christophe"
+title: "Max-INtensity Untargeted Transformation (MINUT) for Direct Chemometric Modeling of High-Resolution Mass Spectrometry Data"
+license: MIT
+url: "https://github.com/valkenzz/MINUT-for-Direct-Chemometric-Modeling-of-HRMS-Spec"
