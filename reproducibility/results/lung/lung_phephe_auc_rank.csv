@@ -1,0 +1,4 @@
+cohort,phephe_auc,rank_by_auc,descriptors_auc_above_0_83,descriptors_auc_1
+discovery (n=85),0.8290909090909091,594,590,30
+validation (n=151),0.7198773448773449,1019,512,43
+all (n=236),0.6479434543950673,1568,367,19

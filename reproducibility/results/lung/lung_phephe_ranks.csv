@@ -1,0 +1,8 @@
+forest,trees,seed,importance,rank,n_descriptors,nonzero_descriptors
+"discovery, all descriptors",1000,0,0.0,1778,4750,674
+"discovery, all descriptors",1000,1,0.0002304851143009039,288,4750,659
+"discovery, all descriptors",1000,2,0.0,1745,4750,601
+"discovery, selector forest of the classifier",100,2024,0.0,1565,4750,115
+"discovery, all descriptors",10000,0,0.0,2927,4750,2584
+all 236 samples,1000,0,5.148949599322067e-05,493,4750,987
+"discovery, PPG bins and neighbours removed",1000,0,0.0,1754,4380,873

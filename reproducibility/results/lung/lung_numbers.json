@@ -1,0 +1,267 @@
+{
+ "n": 236,
+ "n_lc": 143,
+ "n_tb": 93,
+ "n_disc": 85,
+ "n_val": 151,
+ "n_val_lc": 88,
+ "n_val_tb": 63,
+ "disc_date": [
+  "20201008"
+ ],
+ "val_date": [
+  "20201125"
+ ],
+ "stage1_cv": 1.0,
+ "stage1_cv_sd": 0.0,
+ "stage1_acc": 1.0,
+ "stage1_auc": 1.0,
+ "stage1_desc": [
+  "I:25",
+  "I:545",
+  "I:813",
+  "I:818",
+  "I:874",
+  "I:1409",
+  "mz:256"
+ ],
+ "max_ion_top": [
+  [
+   496.34,
+   220
+  ],
+  [
+   338.34,
+   11
+  ],
+  [
+   200.24,
+   2
+  ],
+  [
+   184.07,
+   2
+  ],
+  [
+   535.16,
+   1
+  ]
+ ],
+ "n_bins": 2375,
+ "n_stable": 515,
+ "n_stable_val": 271,
+ "config2_bins": 515,
+ "config2_cv": 0.951388888888889,
+ "config2_cv_sd": 0.08175590362645242,
+ "config2_acc": 0.9536423841059603,
+ "config2_correct": 144,
+ "config2_balanced": 0.9602272727272727,
+ "config2_auc": 0.9996392496392497,
+ "config2_boot": 0.9543377483443708,
+ "config2_boot_sd": 0.017715665031528455,
+ "config2_tp": 81,
+ "config2_fn": 7,
+ "config2_tn": 63,
+ "config2_fp": 0,
+ "config2_wilson": [
+  0.9074092959904997,
+  0.9773658548733507
+ ],
+ "config2_desc": [
+  "I:25",
+  "I:184",
+  "I:213",
+  "I:662",
+  "I:1735",
+  "I:2340",
+  "I:2341"
+ ],
+ "perm": {
+  "n_perm": 500,
+  "null_acc_mean": 0.5070463576158941,
+  "null_acc_sd": 0.06990376137011961,
+  "null_acc_max": 0.6821192052980133,
+  "null_auc_mean": 0.5032736291486292,
+  "null_auc_max": 0.8611111111111112,
+  "p_accuracy": 0.001996007984031936,
+  "p_auc": 0.001996007984031936,
+  "n_perm_cv": 100,
+  "cv_null_mean": 0.5546944444444444,
+  "cv_null_max": 0.6888888888888889,
+  "p_cv": 0.009900990099009901
+ },
+ "run_order": {
+  "validation_accuracy": 0.5827814569536424,
+  "validation_auc": 0.5610569985569984,
+  "cv_accuracy": 0.35138888888888886,
+  "majority_baseline": 0.5827814569536424
+ },
+ "random7": {
+  "mean": 0.550317880794702,
+  "sd": 0.08143390510076579,
+  "max": 0.9470198675496688
+ },
+ "learning_curve": {
+  "10": {
+   "acc": 0.6543046357615894,
+   "sd": 0.09743975107034249,
+   "auc": 0.798597582972583
+  },
+  "15": {
+   "acc": 0.6536423841059602,
+   "sd": 0.10475746393567247,
+   "auc": 0.8186372655122656
+  },
+  "20": {
+   "acc": 0.7185430463576159,
+   "sd": 0.1435003703511913,
+   "auc": 0.8991928210678211
+  },
+  "30": {
+   "acc": 0.8029801324503311,
+   "sd": 0.15116747742649642,
+   "auc": 0.9673746392496392
+  },
+  "40": {
+   "acc": 0.8632450331125827,
+   "sd": 0.1197901111144541,
+   "auc": 0.9677444083694084
+  },
+  "50": {
+   "acc": 0.8913907284768212,
+   "sd": 0.11835801281374642,
+   "auc": 0.9838068181818181
+  },
+  "60": {
+   "acc": 0.9089403973509933,
+   "sd": 0.11043770745091784,
+   "auc": 0.9769209956709958
+  },
+  "70": {
+   "acc": 0.945364238410596,
+   "sd": 0.05680165669898322,
+   "auc": 0.9951433982683984
+  },
+  "85": {
+   "acc": 0.9536423841059603,
+   "sd": 0.0,
+   "auc": 0.9996392496392497
+  }
+ },
+ "seeds": {
+  "acc_min": 0.954,
+  "acc_max": 1.0,
+  "acc_median": 0.993,
+  "auc_min": 1.0,
+  "auc_max": 1.0
+ },
+ "sens_ranges": {
+  "disc_acc_min": 0.464,
+  "disc_acc_max": 0.954,
+  "disc_auc_min": 0.679,
+  "disc_auc_max": 1.0,
+  "by_norm": {
+   "pqn": [
+    0.901,
+    0.954,
+    0.881
+   ],
+   "max": [
+    0.901,
+    0.623,
+    0.464
+   ],
+   "summax": [
+    0.914,
+    0.662,
+    0.47
+   ]
+  },
+  "intensity_only": {
+   "acc": 0.9933774834437086,
+   "auc": 1.0,
+   "cv": 0.9625,
+   "selected": [
+    "I:25",
+    "I:184",
+    "I:213",
+    "I:502",
+    "I:1704",
+    "I:2340",
+    "I:2341"
+   ],
+   "phe_rank": 7
+  }
+ },
+ "rank_phephe": 7,
+ "n_stable_desc": 1030,
+ "literature_ranks": {
+  "phenylalanylphenylalanine": 7,
+  "Phe immonium (in-source)": 19,
+  "LysoPE 18:0": 38,
+  "C18:2-carnitine": 12,
+  "C16-carnitine": 30,
+  "C18:1-carnitine": 34,
+  "anhydroretinol": 17,
+  "LPC 16:0": 10,
+  "LPC 18:2": 25,
+  "LPC 18:1": 29,
+  "LPC 22:6": 39
+ },
+ "drivers": [
+  {
+   "model": "early-eluting ion m/z 100.076 alone",
+   "n_bins": 1,
+   "validation_accuracy": 0.695,
+   "validation_auc": 0.915,
+   "descriptors": "I:25"
+  },
+  {
+   "model": "the two doubly charged ions m/z 931.64 and 932.14 alone",
+   "n_bins": 2,
+   "validation_accuracy": 0.947,
+   "validation_auc": 0.976,
+   "descriptors": "I:2341;I:2340"
+  },
+  {
+   "model": "the six unidentified top bins, no selection",
+   "n_bins": 6,
+   "validation_accuracy": 0.974,
+   "validation_auc": 1.0,
+   "descriptors": "I:25;I:2341;I:2340;I:1704;I:184;I:213"
+  },
+  {
+   "model": "all stable bins, article selector (= second configuration)",
+   "n_bins": 515,
+   "validation_accuracy": 0.954,
+   "validation_auc": 1.0,
+   "descriptors": "I:25;I:184;I:213;I:662;I:1735;I:2340;I:2341"
+  },
+  {
+   "model": "stable bins without the six unidentified top bins, article selector",
+   "n_bins": 509,
+   "validation_accuracy": 0.642,
+   "validation_auc": 0.829,
+   "descriptors": "I:131;I:542;I:662;I:689;I:711;I:735;I:750"
+  },
+  {
+   "model": "the ten identified metabolite bins, no selection",
+   "n_bins": 10,
+   "validation_accuracy": 0.735,
+   "validation_auc": 0.86,
+   "descriptors": "I:131;I:691;I:662;I:650;I:663;I:1059;I:698;I:710;I:711;I:734"
+  },
+  {
+   "model": "phenylalanylphenylalanine bin alone",
+   "n_bins": 1,
+   "validation_accuracy": 0.642,
+   "validation_auc": 0.609,
+   "descriptors": "I:131"
+  }
+ ],
+ "stage1_ppg_desc": 4,
+ "ppg_strong_total": 27,
+ "ppg_strong_in_stable": 5,
+ "ppg_any_total": 66,
+ "ppg_any_in_stable": 10
+}

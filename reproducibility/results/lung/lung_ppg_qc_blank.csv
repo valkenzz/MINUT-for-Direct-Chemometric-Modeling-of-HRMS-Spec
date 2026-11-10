@@ -1,0 +1,16 @@
+bin,ppg_ion,group,n,retained_is_ppg
+227,PPG8 [M+Na]+,Experimental blank,2,0
+227,PPG8 [M+Na]+,Healthy Control,100,100
+227,PPG8 [M+Na]+,Pulmonary Tuberculosis,93,0
+227,PPG8 [M+Na]+,lung cancer,143,143
+227,PPG8 [M+Na]+,pooled quality control sample,51,51
+256,PPG9 [M+Na]+,Experimental blank,2,0
+256,PPG9 [M+Na]+,Healthy Control,100,100
+256,PPG9 [M+Na]+,Pulmonary Tuberculosis,93,0
+256,PPG9 [M+Na]+,lung cancer,143,143
+256,PPG9 [M+Na]+,pooled quality control sample,51,51
+216,PPG8 [M+H]+,Experimental blank,2,0
+216,PPG8 [M+H]+,Healthy Control,100,97
+216,PPG8 [M+H]+,Pulmonary Tuberculosis,93,0
+216,PPG8 [M+H]+,lung cancer,143,139
+216,PPG8 [M+H]+,pooled quality control sample,51,50

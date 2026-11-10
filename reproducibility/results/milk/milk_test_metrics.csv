@@ -1,0 +1,2 @@
+n,n_negative,n_positive,tn,fp,fn,tp,accuracy,balanced_accuracy,majority_baseline,sensitivity_organic,sensitivity_conventional,accuracy_wilson95,sensitivity_organic_wilson95,sensitivity_conventional_wilson95,roc_auc,bootstrap_balanced_accuracy,bootstrap_balanced_sd,n_selected_descriptors
+36,27,9,27,0,2,7,0.9444444444444444,0.8888888888888888,0.75,0.7777777777777778,1.0,"(0.8185502589238878, 0.9846303362329332)","(0.4525833436728054, 0.9367762376877727)","(0.8754409628553641, 1.0)",0.9732510288065843,0.8911517219493613,0.07116809842498506,101

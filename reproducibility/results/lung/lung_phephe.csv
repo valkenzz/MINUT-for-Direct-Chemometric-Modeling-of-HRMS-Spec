@@ -1,0 +1,10 @@
+quantity,LC,TB
+"313.155 detected in [2,4) min",143/143,93/93
+"apex RT (median, sd)",2.34 (0.01),2.35 (0.01)
+"apex intensity, median [IQR]",29346 [16441-39542],13987 [8372-25322]
+"apex intensity, discovery / validation",16125 / 36239,9047 / 20541
+Mann-Whitney p (LC vs TB),1.1e-10,
+[M+Na]+ 335.137 relative to [M+H]+ (XIC correlation),0.012 (0.82),0.012 (0.73)
+M+1/M (expected 0.20),0.184,0.182
+MSE at apex: immonium 120.081 / y1 166.086 / surviving precursor (summed counts),118318 / 1451 / 819,61242 / 743 / 415
+"bin [312,314) x [2,4) retained maximum within 10 ppm of 313.1547",142/143,89/93

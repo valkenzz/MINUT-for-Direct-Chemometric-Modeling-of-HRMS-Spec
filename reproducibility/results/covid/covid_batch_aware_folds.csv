@@ -1,0 +1,64 @@
+protocol,fold,n_test,accuracy,auc,held_out_group,n_train,n_test_control,n_test_severe
+"batch-only baseline, 5-fold stratified (seed 2024), all 63",0,13,0.846154,0.976190,13092020;15092020;20092020;23092020;24092020;26092020,,,
+"batch-only baseline, 5-fold stratified (seed 2024), all 63",1,13,0.846154,0.880952,13092020;15092020;20092020;22092020;23092020;26092020,,,
+"batch-only baseline, 5-fold stratified (seed 2024), all 63",2,13,0.769231,0.869048,13092020;15092020;20092020;22092020;23092020,,,
+"batch-only baseline, 5-fold stratified (seed 2024), all 63",3,12,0.666667,0.694444,13092020;15092020;20092020;22092020;23092020;26092020,,,
+"batch-only baseline, 5-fold stratified (seed 2024), all 63",4,12,0.583333,0.652778,13092020;15092020;20092020;23092020;26092020,,,
+"MINUT, mixed batches only (n=46), 5-fold stratified (seed 2024)",0,10,1.000000,1.000000,13092020;15092020;20092020;26092020,36.000000,7.000000,3.000000
+"MINUT, mixed batches only (n=46), 5-fold stratified (seed 2024)",1,9,0.777778,0.805556,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT, mixed batches only (n=46), 5-fold stratified (seed 2024)",2,9,0.777778,0.972222,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT, mixed batches only (n=46), 5-fold stratified (seed 2024)",3,9,0.888889,0.888889,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT, mixed batches only (n=46), 5-fold stratified (seed 2024)",4,9,0.888889,0.944444,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"batch-only baseline, mixed batches only (n=46), 5-fold",0,10,0.800000,0.714286,13092020;15092020;20092020;26092020,,,
+"batch-only baseline, mixed batches only (n=46), 5-fold",1,9,0.666667,0.583333,13092020;15092020;20092020;26092020,,,
+"batch-only baseline, mixed batches only (n=46), 5-fold",2,9,0.666667,0.583333,13092020;15092020;20092020;26092020,,,
+"batch-only baseline, mixed batches only (n=46), 5-fold",3,9,0.555556,0.416667,13092020;15092020;20092020;26092020,,,
+"batch-only baseline, mixed batches only (n=46), 5-fold",4,9,0.666667,0.861111,13092020;15092020;20092020;26092020,,,
+"MINUT, leave-one-batch-out (7 batches)",0,9,0.777778,0.812500,13092020,54.000000,8.000000,1.000000
+"MINUT, leave-one-batch-out (7 batches)",1,15,0.266667,0.647727,15092020,48.000000,11.000000,4.000000
+"MINUT, leave-one-batch-out (7 batches)",2,9,0.555556,0.100000,20092020,54.000000,4.000000,5.000000
+"MINUT, leave-one-batch-out (7 batches)",3,6,0.833333,,22092020,57.000000,0.000000,6.000000
+"MINUT, leave-one-batch-out (7 batches)",4,10,0.900000,,23092020,53.000000,0.000000,10.000000
+"MINUT, leave-one-batch-out (7 batches)",5,1,1.000000,,24092020,62.000000,0.000000,1.000000
+"MINUT, leave-one-batch-out (7 batches)",6,13,0.230769,0.325000,26092020,50.000000,8.000000,5.000000
+"batch-only baseline, leave-one-batch-out",0,9,0.111111,0.500000,13092020,,,
+"batch-only baseline, leave-one-batch-out",1,15,0.266667,0.500000,15092020,,,
+"batch-only baseline, leave-one-batch-out",2,9,0.555556,0.500000,20092020,,,
+"batch-only baseline, leave-one-batch-out",3,6,1.000000,,22092020,,,
+"batch-only baseline, leave-one-batch-out",4,10,1.000000,,23092020,,,
+"batch-only baseline, leave-one-batch-out",5,1,1.000000,,24092020,,,
+"batch-only baseline, leave-one-batch-out",6,13,0.384615,0.500000,26092020,,,
+"MINUT m/z + RT blocks (no intensity), mixed batches only (n=46), 5-fold stratified (seed 2024)",0,10,0.900000,1.000000,13092020;15092020;20092020;26092020,36.000000,7.000000,3.000000
+"MINUT m/z + RT blocks (no intensity), mixed batches only (n=46), 5-fold stratified (seed 2024)",1,9,0.888889,1.000000,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z + RT blocks (no intensity), mixed batches only (n=46), 5-fold stratified (seed 2024)",2,9,0.777778,0.888889,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z + RT blocks (no intensity), mixed batches only (n=46), 5-fold stratified (seed 2024)",3,9,0.777778,0.833333,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z + RT blocks (no intensity), mixed batches only (n=46), 5-fold stratified (seed 2024)",4,9,0.666667,1.000000,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",0,9,0.666667,0.937500,13092020,54.000000,8.000000,1.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",1,15,0.666667,0.829545,15092020,48.000000,11.000000,4.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",2,9,0.555556,0.475000,20092020,54.000000,4.000000,5.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",3,6,1.000000,,22092020,57.000000,0.000000,6.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",4,10,1.000000,,23092020,53.000000,0.000000,10.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",5,1,1.000000,,24092020,62.000000,0.000000,1.000000
+"MINUT m/z + RT blocks (no intensity), leave-one-batch-out (7 batches)",6,13,0.384615,0.775000,26092020,50.000000,8.000000,5.000000
+"MINUT m/z + RT blocks (no intensity), all 63, 5-fold stratified (seed 2024)",0,13,0.923077,1.000000,,50.000000,6.000000,7.000000
+"MINUT m/z + RT blocks (no intensity), all 63, 5-fold stratified (seed 2024)",1,13,0.923077,0.952381,,50.000000,6.000000,7.000000
+"MINUT m/z + RT blocks (no intensity), all 63, 5-fold stratified (seed 2024)",2,13,0.692308,0.833333,,50.000000,7.000000,6.000000
+"MINUT m/z + RT blocks (no intensity), all 63, 5-fold stratified (seed 2024)",3,12,0.750000,0.833333,,51.000000,6.000000,6.000000
+"MINUT m/z + RT blocks (no intensity), all 63, 5-fold stratified (seed 2024)",4,12,0.666667,0.805556,,51.000000,6.000000,6.000000
+"MINUT m/z block only, mixed batches only (n=46), 5-fold stratified (seed 2024)",0,10,0.800000,0.952381,13092020;15092020;20092020;26092020,36.000000,7.000000,3.000000
+"MINUT m/z block only, mixed batches only (n=46), 5-fold stratified (seed 2024)",1,9,0.777778,0.861111,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z block only, mixed batches only (n=46), 5-fold stratified (seed 2024)",2,9,0.777778,0.888889,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z block only, mixed batches only (n=46), 5-fold stratified (seed 2024)",3,9,0.777778,0.833333,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z block only, mixed batches only (n=46), 5-fold stratified (seed 2024)",4,9,0.666667,0.916667,13092020;15092020;20092020;26092020,37.000000,6.000000,3.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",0,9,0.888889,1.000000,13092020,54.000000,8.000000,1.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",1,15,0.866667,0.977273,15092020,48.000000,11.000000,4.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",2,9,0.555556,0.175000,20092020,54.000000,4.000000,5.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",3,6,1.000000,,22092020,57.000000,0.000000,6.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",4,10,0.600000,,23092020,53.000000,0.000000,10.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",5,1,1.000000,,24092020,62.000000,0.000000,1.000000
+"MINUT m/z block only, leave-one-batch-out (7 batches)",6,13,0.461538,0.450000,26092020,50.000000,8.000000,5.000000
+"MINUT m/z block only, all 63, 5-fold stratified (seed 2024)",0,13,0.923077,0.976190,,50.000000,6.000000,7.000000
+"MINUT m/z block only, all 63, 5-fold stratified (seed 2024)",1,13,0.846154,0.976190,,50.000000,6.000000,7.000000
+"MINUT m/z block only, all 63, 5-fold stratified (seed 2024)",2,13,0.769231,0.821429,,50.000000,7.000000,6.000000
+"MINUT m/z block only, all 63, 5-fold stratified (seed 2024)",3,12,0.750000,0.777778,,51.000000,6.000000,6.000000
+"MINUT m/z block only, all 63, 5-fold stratified (seed 2024)",4,12,0.750000,0.916667,,51.000000,6.000000,6.000000

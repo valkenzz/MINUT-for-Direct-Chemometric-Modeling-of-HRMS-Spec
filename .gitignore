@@ -2,5 +2,12 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 *.npz
-results/
+!data/*.npz
 outputs/
+
+# caches of the reproducibility notebooks (MS1-only COVID vectors and MINUT re-runs, rebuilt from the raw files)
+reproducibility/results/**/*.npy
+
+# local re-execution driver and its logs (machine-specific paths)
+reproducibility/rerun_*
+

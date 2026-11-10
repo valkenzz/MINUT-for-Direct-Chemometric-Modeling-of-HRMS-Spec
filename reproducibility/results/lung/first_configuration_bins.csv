@@ -1,0 +1,4 @@
+hypothesis,rank_I_1000t,rank_mz_1000t,bin,bin_limits,target_mz,n_cluster,tuberculosis,cancer,mean_mz,sd_ppm
+"505.296 (26-hydroxycholesterol-3-sulfate [M+Na]+, withdrawn)",6,2,227,"m/z [504,506) RT [2,4) min",505.2983,11,11,0,505.2899891246449,30.003057512855204
+505.335 (PPG-8 [M+Na]+),6,2,227,"m/z [504,506) RT [2,4) min",505.3349,88,0,88,505.33482881025833,2.4553611808390947
+"483.13 (silybin [M+H]+, withdrawn)",226,5,216,"m/z [482,484) RT [2,4) min",483.128,3,3,0,483.1335042317708,3.887428506597941

@@ -1,0 +1,8 @@
+model,n_bins,validation_accuracy,validation_auc,descriptors
+early-eluting ion m/z 100.076 alone,1,0.695,0.915,I:25
+the two doubly charged ions m/z 931.64 and 932.14 alone,2,0.947,0.976,I:2341;I:2340
+"the six unidentified top bins, no selection",6,0.974,1.0,I:25;I:2341;I:2340;I:1704;I:184;I:213
+"all stable bins, article selector (= second configuration)",515,0.954,1.0,I:25;I:184;I:213;I:662;I:1735;I:2340;I:2341
+"stable bins without the six unidentified top bins, article selector",509,0.642,0.829,I:131;I:542;I:662;I:689;I:711;I:735;I:750
+"the ten identified metabolite bins, no selection",10,0.735,0.86,I:131;I:691;I:662;I:650;I:663;I:1059;I:698;I:710;I:711;I:734
+phenylalanylphenylalanine bin alone,1,0.642,0.609,I:131

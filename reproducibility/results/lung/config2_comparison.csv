@@ -1,0 +1,4 @@
+configuration,cv10,accuracy,auc
+source study (Chen et al. 2023),--,0.82,0.89
+"first configuration: all bins, max normalization (as submitted)",1.00 ± 0.00,1.0,1.0
+"second configuration: 515 stable bins, PQN",0.95 ± 0.08,0.954,1.0

@@ -1,0 +1,27 @@
+{
+ "n_candidates": 212,
+ "n_sourced": 127,
+ "n_usable_compounds": 181,
+ "n_usable_sourced_compounds": 111,
+ "n_table_ions": 11,
+ "n_table_compounds": 11,
+ "n_excluded_orphan": 9,
+ "n_descriptors_ext": 24000,
+ "n_descriptors_220": 21600,
+ "best_ext": {
+  "name": "N1-Acetylspermidine",
+  "adduct": "[M+H]+",
+  "median": 223,
+  "min": 77,
+  "max": 490,
+  "seeds_top100": 1
+ },
+ "best_220": {
+  "name": "octanoylcarnitine (C8)",
+  "adduct": "[M+H]+",
+  "median": 4990,
+  "min": 1619,
+  "max": 6992
+ },
+ "any_marker_top100_all_seeds": false
+}

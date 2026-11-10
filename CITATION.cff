@@ -1,8 +1,19 @@
+# Citation metadata read by GitHub ("Cite this repository").
+# The file must stay valid CFF 1.2.0 for GitHub to show the button: ISO date in date-released, status from the CFF list.
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use MINUT, please cite both the software (this file) and the article (preferred-citation)."
+type: software
+title: "MINUT: Max-INtensity Untargeted Transformation for direct chemometric modeling of HRMS data"
+abstract: >-
+  MINUT bins each LC-HRMS run on a fixed (m/z, retention time) grid and keeps, in every bin, the most
+  intense point together with its m/z and retention time, giving one feature vector per run without
+  peak picking or alignment. The repository holds the transform, the deposited feature tables of the
+  three case studies of the article (milk authenticity, lung cancer vs tuberculosis, COVID-19
+  severity) and the notebooks that recompute every number, table and figure of the article.
 authors:
   - family-names: "Meo"
     given-names: "Valentin"
+    affiliation: "LARTIC, Département des sciences des aliments, Université Laval"
   - family-names: "Gauriat"
     given-names: "Bénédicte"
   - family-names: "Garnier"
@@ -13,6 +24,36 @@ authors:
     given-names: "Lucie"
   - family-names: "Cordella"
     given-names: "Christophe"
-title: "Max-INtensity Untargeted Transformation (MINUT) for Direct Chemometric Modeling of High-Resolution Mass Spectrometry Data"
+    affiliation: "LARTIC, Département des sciences des aliments, Université Laval"
+version: "1.0.0"
+date-released: "2026-11-10"
 license: MIT
+repository-code: "https://github.com/valkenzz/MINUT-for-Direct-Chemometric-Modeling-of-HRMS-Spec"
 url: "https://github.com/valkenzz/MINUT-for-Direct-Chemometric-Modeling-of-HRMS-Spec"
+keywords:
+  - mass spectrometry
+  - LC-HRMS
+  - untargeted metabolomics
+  - chemometrics
+  - binning
+  - random forest
+  - food authenticity
+preferred-citation:
+  type: article
+  title: "Max-INtensity Untargeted Transformation (MINUT) for Direct Chemometric Modeling of High-Resolution Mass Spectrometry Data"
+  authors:
+    - family-names: "Meo"
+      given-names: "Valentin"
+    - family-names: "Gauriat"
+      given-names: "Bénédicte"
+    - family-names: "Garnier"
+      given-names: "Jean-François"
+    - family-names: "Bertrand"
+      given-names: "Dominique"
+    - family-names: "Tsamba"
+      given-names: "Lucie"
+    - family-names: "Cordella"
+      given-names: "Christophe"
+  journal: "ACS Omega"
+  year: 2026
+  status: "submitted"

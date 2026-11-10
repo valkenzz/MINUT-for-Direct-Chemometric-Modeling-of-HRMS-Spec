@@ -1,0 +1,4 @@
+setting,n_bins_removed,cv_accuracy,cv_sd,test_accuracy,test_auc,descriptors
+paper (all bins),0,1.0,0.0,1.0,1.0,I:25;I:545;I:813;I:818;I:874;I:1409;mz:256
+PPG-maximum bins removed (share >= 0.5),27,1.0,0.0,0.6225165562913907,1.0,I:754;I:813;I:821;I:848;I:896;I:1221;I:1378;mz:1294
+PPG bins (any share) and m/z neighbours removed,185,0.975,0.075,0.9536423841059603,0.9969336219336219,I:304;I:323;I:330;I:803;I:821;I:1209;mz:976

@@ -1,0 +1,2 @@
+cv_accuracy,cv_sd,permutation_p,test_accuracy,test_auc,bootstrap_accuracy,bootstrap_sd,n_features
+0.921905,0.038580,0.009901,0.944444,0.973251,0.945361,0.037842,101

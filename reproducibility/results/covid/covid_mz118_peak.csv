@@ -1,0 +1,2 @@
+main_rt_mean,main_rt_min,main_rt_max,main_M1_over_M,expected,bin3_max_over_main_median,bin3_nonzero_min,bin4_nonzero_min,bin3_max_over_min_median,first_scan_I_median
+0.8197619047619049,0.77,0.893,0.0573723814619699,0.05773193946839843,0.01937838675065856,1.0,1.0,1.4315527445029068,692513.625

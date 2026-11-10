@@ -1,12 +1,16 @@
 # MINUT
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](requirements.txt)
+
 Max-INtensity Untargeted Transformation: a direct route from LC-HRMS runs to a
 sample × feature matrix, without peak picking or retention-time alignment.
 
 Each run is binned on a fixed (m/z, retention time) grid and every bin keeps its most
 intense point together with the m/z and RT at which it occurred. The whole transform is
-`minut.py` (about 100 lines). `case_studies_rerun.py` reruns the three case studies of the
-paper from the deposited feature tables; `MINUT.ipynb` walks through both.
+`minut.py` (about 100 lines). `case_studies.py` reruns the three case studies of the
+paper from the deposited feature tables, and `extract_minut.py` applies the transform to a
+run of your own; the `reproducibility/` notebooks recompute every number of the article.
 
 MINUT was developed in the [LARTIC](https://lartic.fsaa.ulaval.ca/equipe) team
 (Département des sciences des aliments, Université Laval).
@@ -22,53 +26,120 @@ python -m venv .venv
 git lfs install && git lfs pull        # the feature tables in data/ are stored with Git LFS
 ```
 
-## Reproducing the paper
+The feature tables (`data/*.pkl`, 350 MB) and the re-extracted COVID-19 matrix behind the MS-level comparison of
+the Supporting Information (`data/covid_mz0p5_rt1.npz`, 100 MB) are stored with Git LFS: clone with Git LFS
+installed (or run `git lfs pull` after cloning), or download them from the `data/` folder on GitHub.
+
+
+## Usage
+
+MINUT takes one LC-HRMS run (an mzML or mzXML file) and returns one vector per run, always of
+the same length, whatever the instrument did that day. There is nothing to tune beyond the
+grid: no peak picking, no alignment, no gap filling. Three steps are enough to go from raw
+files to a classifier.
+
+### 1. Transforming your own runs
+
+A grid is six numbers: the m/z range and bin width, the retention-time range and bin width
+(`mz_min mz_max mz_width rt_min rt_max rt_width`, RT in minutes):
+
+```bash
+python extract_minut.py run.mzML  --mz-range 50 1500 --rt-range 1 30 --mz-width 1 --rt-width 0.5   # your own grid
+python extract_minut.py run.mzXML --grid covid --normalization tic  # intensity divided by the TIC instead of the maximum
+```
+
+By default only MS1 scans are binned and the intensity block is divided by the per-sample
+maximum, as in the article. 
+
+The `.npz` holds the three per-bin arrays (`intensity`, `mz`, `rt`, shape `n_rt × n_mz`), the
+flattened `vector` used by the classifiers, the `grid` that produced it and the `normalization`
+used, so that a vector can always be traced back to its grid. Keep the same grid for every run
+of a cohort: that is what makes the vectors comparable.
+
+### 2. The same thing in Python
+
+```python
+import numpy as np
+from minut import grid_shape, transform_file
+
+# a grid is six numbers: mz_min, mz_max, mz_width, rt_min, rt_max, rt_width (RT in minutes);
+# this one is the command line above: --mz-range 50 1500 --rt-range 1 30 --mz-width 1 --rt-width 0.5
+grid = (50.0, 1500.0, 1.0, 1.0, 30.0, 0.5)
+vector = transform_file("run.mzML", grid)   # MS1 scans by default; ms_levels=None bins every scan
+
+n_rt, n_mz = grid_shape(grid)               # 58 RT bins × 1450 m/z bins = 84 100 bins
+n_bins = n_rt * n_mz
+intensity, mz, rt = vector[:n_bins], vector[n_bins:2 * n_bins], vector[2 * n_bins:]
+```
+
+
+The vector is `[intensity | m/z | RT]`: three blocks of `n_bins` values, each block laid out
+RT-major (bin `b` is RT row `b // n_mz`, m/z column `b % n_mz`). The intensity block is the
+most intense point of each bin divided by the per-sample maximum; the m/z and RT blocks are
+the coordinates at which that point was found, min–max scaled with the grid limits so that
+every run shares the same frame. Empty bins are 0 in the three blocks. Turning a bin back into
+physical coordinates is one line:
+
+```python
+b = int(np.argmax(intensity))               # the bin holding the base peak of the run
+mz_min, mz_max, mz_w, rt_min, rt_max, rt_w = grid
+i_rt, j_mz = divmod(b, n_mz)
+print(f"bin {b}: m/z [{mz_min + j_mz * mz_w:g}, {mz_min + (j_mz + 1) * mz_w:g}) × RT [{rt_min + i_rt * rt_w:g}, {rt_min + (i_rt + 1) * rt_w:g}) min")
+print(f"retained point: m/z {mz_min + mz[b] * (mz_max - mz_min):.3f}, RT {rt_min + rt[b] * (rt_max - rt_min):.2f} min")
+```
 
 ```
-python case_studies_rerun.py           # prints the numbers below and writes them to results/, a few minutes
+bin 4796: m/z [496, 497) × RT [2.5, 3) min
+retained point: m/z 496.340, RT 2.50 min
 ```
 
-| | Paper | `case_studies_rerun.py` |
-|---|---|---|
-| Milk, training 10-fold CV accuracy | 0.92 | 0.9219 ± 0.0386 |
-| Milk, test set (36 samples): bootstrap accuracy / SD / ROC AUC | 0.95 / 0.04 / 0.97 | 0.9454 / 0.0378 / 0.9733 (34/36 correct) |
-| Milk, permutation p-value | 0.0099 | 0.0099 |
-| Lung, validation cohort (151 samples): accuracy / ROC AUC | 1.00 / 1.00 | 1.00 / 1.00 |
-| Lung, training 10-fold CV accuracy (Table 5, MINUT row) | 1.00 ± 0.00 | 1.00 ± 0.00 |
-| COVID-19, stratified 5-fold CV: accuracy / ROC AUC | 0.854 ± 0.100 / 0.866 ± 0.129 | 0.8538 ± 0.0998 / 0.8663 ± 0.1289 |
-| Sphingosine-compatible bin 16044: n, Mann–Whitney U, p | 51 (26 controls, 25 severe), 458, 0.013 | same |
-| PABA-compatible bin 183: conventional / organic, Fisher p | 105 / 8, 2.4·10⁻¹⁵ | same |
+Two other normalizations of the intensity block are available, `transform_file(path, grid,
+normalization="tic")` (total ion current of the binned scans) and `"none"` (raw counts);
+the article uses the per-sample maximum.
 
-The ablation rows of Table 1 (1D binning, 2D averaging) come from separate pipelines that are not part of this package.
+### 3. From vectors to a classifier
 
-### Protocols
+Stack the vectors of a cohort into a matrix (one row per run) and feed it to any classifier;
+the article uses a random forest with in-fold selection of the most important descriptors.
+Because every column keeps its coordinates, the bins the model relies on can be read back and
+checked in the raw data, which is what the `reproducibility/` notebooks do for the three cohorts.
 
-*Milk.* First injection of each sample, batches 20220215 and 20220216 (177 samples), m/z
-and RT blocks only, 141/36 split (`random_state=42`). Cross-validation: the 100 most
-important features (Gini, forest seed 0) refitted in each fold, classifier seed 2024.
-Final model: importance-threshold selection at rank 100 (`threshold_selection`), the
-selection of the original analysis behind the test-set numbers. The permutation test is
-the one of the original analysis: 100 label permutations of the test set, 5-fold, on the
-selected features.
+```python
+from pathlib import Path
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
 
-*Lung.* Discovery cohort (85) for training, validation cohort (151) for testing; intensity
-and m/z blocks. Cross-validation with the 6 most important features (seed 2024); final
-model with the same threshold selection at rank 6, i.e. the seven bins of Table 3
-(classifier seed 42).
+files = sorted(Path("my_runs").glob("*.mzML"))
+X = np.vstack([transform_file(f, grid) for f in files])
+y = np.array([1 if "case" in f.name else 0 for f in files])          # your labels
+print(cross_val_score(RandomForestClassifier(n_estimators=100, random_state=0), X, y, cv=5).mean())
+```
 
-*COVID-19.* One injection per subject (63: 32 severe, 31 controls). In each of five
-stratified folds (`shuffle=True, random_state=2024`) the selector keeps the 1000 features
-with the largest Gini importance (1000 trees, seed 0), scores them by the average of a
-min–max scaled Mann–Whitney U (controls first) and a Fisher criterion, and keeps the best
-100; the classifier is a 100-tree forest (seed 0). Reported values are the mean and SD
-over the five held-out folds.
+A few practical points. The grid is the only parameter that matters: start from the RT range
+where your chromatography is informative and from a m/z width of the order of your mass
+accuracy times a few (the article uses 0.5 to 10 m/z); `python case_studies.py` and the
+notebooks show how the bin size was chosen automaticaly on training data only. MINUT does no centroiding:
+profile or centroid spectra are binned as they are stored in the file. Intensity descriptors
+carry acquisition-batch information, so keep batches balanced across classes or evaluate with
+a batch held out (see `docs/downstream_workflow.md`). Once a bin ranks high, treat it as a
+region to investigate, not as an identified compound: the same notebooks show how we went
+from a bin to extracted-ion chromatograms, isotope ratios and MS/MS evidence.
+
+## Material of the second revision
+
+For the second revision we gathered the code behind every number, table and figure of the article in
+`reproducibility/`: one module (`reproducibility/minut.py`, the transform plus the helpers the notebooks share) and one
+notebook per case study (`milk.ipynb`, `lung.ipynb`, `covid.ipynb`). Each notebook runs end to end from the
+deposited feature tables and writes its tables and figures to `reproducibility/results/`. `docs/downstream_workflow.md` describes what we recommend doing once MINUT has
+ranked the bins. The transform itself gained two normalization options: `minut.feature_vector` and
+`minut.transform_file` accept `normalization="tic"` or `"none"` besides the per-sample maximum of the article.
 
 ## Data
 
 `data/*.pkl` are pandas DataFrames with one row per run. `echantillon` is the run identifier
 (the file name for the two public cohorts, the sample number for the milk) and `output_vector`
 the MINUT vector `[intensity | m/z | RT]`, each block flattened RT-major and scaled to [0, 1]:
-intensity by the run maximum, m/z and RT by the grid limits. The milk table also carries
+intensity by the per-sample maximum, m/z and RT by the grid limits. The milk table also carries
 `batch` and `categ` (b = organic, c = conventional).
 
 | File | Grid | Source |
@@ -83,93 +154,68 @@ with their subject, group or disease, cohort and batch; the loaders take the lab
 ### Regenerating the tables
 
 The public tables were computed from mzML/mzXML files written by ProteoWizard `msconvert`
-without any filter, and MINUT was applied to every scan of the file: MS1 and MS2 scans
+without any filter, and MINUT was applied to every scan of the file: MS$^1$ and MS$^2$ scans
 for MTBLS2291 and, for the Waters files of MTBLS6990, the low- and high-energy functions
-and the lock-mass reference function. The milk tables come from the centroided MS1 mzXML
+and the lock-mass reference function. The milk tables come from the centroided MS$^1$ mzXML
 files supplied with the samples. `transform_file(path, grid, ms_levels=None)` on such a
 file gives back the deposited vector: identically for MTBLS2291; for MTBLS6990 the RT
 block and for the milk the intensity block differ by at most 5·10⁻⁸, because the original
 run held these two quantities in single precision, everything else being identical
-(checked on samples of each cohort). `ms_levels=(1,)`, the default, bins the MS1 scans
+(checked on samples of each cohort). `ms_levels=(1,)`, the default, bins the MS$^1$ scans
 only.
 
-## Transforming your own runs
 
-```
-python extract_minut.py run.mzXML --grid covid                 # MS1 scans, 0.5 m/z × 1 min
-python extract_minut.py run.mzML --grid lung --mz-width 10     # coarser grid
-python extract_minut.py run.mzXML --grid covid --all-ms-levels
-```
+## Reference peak-picking tools (Table 5)
 
-or, in Python, `minut.transform_file(path, grid)`, where `grid` is
-`(mz_min, mz_max, mz_width, rt_min, rt_max, rt_width)` with RT in minutes. The transform
-does no centroiding: profile or centroid spectra are binned as they are stored in the file.
-
-## Earlier material kept in this repository
-
-The files of the first submission stay in place: `MINUT_full_reproducibility.ipynb`, the
-`CaseStudy/` notebooks and their feature tables, `scripts/extract_asari.py`,
-`scripts/extract_ffm.py` and `scripts/extract_xcms.R` (feature extraction of the four-tool
-comparison), and `manifests/`. The numbers of the paper are the ones produced by
-`case_studies_rerun.py` above.
-
-### Raw files and manifests
-
-The first-submission workflow starts from the converted raw files (mzML/mzXML), which are
-not distributed here. Point `MINUT_DATA_DIR` to the folder that holds them (the scripts and
-notebooks default to a folder named `data`, which in this repository holds the feature tables):
+The asari, FeatureFinderMetabo and XCMS rows of Table 5 come from `reproducibility/scripts/`:
+`extract_asari.py`, `extract_ffm.py` and `extract_xcms.R` extract one feature table per dataset
+and tool from the converted raw files, and `bench_eval.py` scores
+such a table with the classifier of the Supporting Information (section 2.3). The raw files
+(mzML/mzXML) are not distributed here: point `MINUT_DATA_DIR` to the folder that holds them
+and list them in a manifest with the columns `sample_name, file_path, label` (the manifests we
+used are in `Archive/manifests/`). asari and pyOpenMS are the optional entries of
+`requirements.txt`; XCMS needs R ≥ 4.3 with `xcms`, `MsExperiment` and `BiocParallel`. The
+tables are written to `outputs/features/` (override with `MINUT_FEATURES_DIR`), together with
+the versions of the software that produced them.
 
 ```bash
-# Windows PowerShell
-$env:MINUT_DATA_DIR = "C:\path\to\raw_files"
-# Linux/macOS
-export MINUT_DATA_DIR=/path/to/raw_files
+python  reproducibility/scripts/extract_ffm.py   --dataset lung --manifest Archive/manifests/lung.csv
+python  reproducibility/scripts/extract_asari.py --dataset lung --manifest Archive/manifests/lung.csv
+Rscript reproducibility/scripts/extract_xcms.R   lung Archive/manifests/lung.csv
 ```
 
-Each `manifests/<dataset>.csv` lists `sample_name, file_path, label`, where `file_path`
-is just the file name, resolved under `MINUT_DATA_DIR`. If your downloaded file names
-differ, edit the `file_path` column accordingly.
+## Archive
 
-### First-submission notebook
+`Archive/` holds the material of the first submission as it was deposited: the three
+case-study notebooks and their feature tables (`CaseStudy/`), the first reproducibility
+notebook (`MINUT_full_reproducibility.ipynb`), the walk-through notebook of the first
+revision (`MINUT.ipynb`), the candidate-region statistics of that revision (`regions.py` and
+its two tables) and the manifests of the raw files. It is kept
+for the record and is not needed to reproduce the article; the numbers of the paper are those
+of `case_studies.py` and of the `reproducibility/` notebooks. `Archive/README.md` says what each
+file is.
 
-Launch Jupyter from this folder and run `MINUT_full_reproducibility.ipynb` top to bottom:
+## Citation
 
-```bash
-jupyter lab MINUT_full_reproducibility.ipynb
+If you use MINUT, please cite the article and the github repository (*Cite this
+repository* button reads `CITATION.cff`):
+
+> Meo V., Gauriat B., Garnier J.-F., Bertrand D., Tsamba L., Cordella C. Max-INtensity Untargeted
+> Transformation (MINUT) for Direct Chemometric Modeling of High-Resolution Mass Spectrometry Data.
+> *ACS Omega*, under review.
+
+```bibtex
+@software{minut_2026,
+  author    = {Meo, Valentin and Gauriat, B{\'e}n{\'e}dicte and Garnier, Jean-Fran{\c{c}}ois and
+               Bertrand, Dominique and Tsamba, Lucie and Cordella, Christophe},
+  title     = {{MINUT}: Max-INtensity Untargeted Transformation for direct chemometric modeling of HRMS data},
+  year      = {2026},
+  version   = {1.0.0},
+  url       = {https://github.com/valkenzz/MINUT-for-Direct-Chemometric-Modeling-of-HRMS-Spec}
+}
 ```
 
-- **Sections 0–1** — configuration and a self-contained copy of the MINUT transform.
-- **Section 1.a** — MINUT feature extraction (writes `outputs/features/<dataset>_minut.csv`).
-- **Section 3** — evaluation of the reference-tool feature tables (asari / FFM / XCMS) with a
-  100-tree random forest, 10-fold CV, `random_state=2024`; MINUT is not scored here (its
-  numbers come from `case_studies_rerun.py`).
-- **Section 4** — extraction-time table.
+## License
 
-Set `RUN_MODE = "full"` (section 0) and call `run_all()` (section 5) to process every dataset.
-
-### Peak-picking comparison
-
-Feature extraction with the reference peak pickers, one table per dataset and tool, written
-to `outputs/features/` (override with `MINUT_FEATURES_DIR`). asari and pyOpenMS are the
-optional entries of `requirements.txt`; XCMS needs R ≥ 4.3 with `xcms`, `MsExperiment` and
-`BiocParallel`.
-
-```bash
-python  scripts/extract_ffm.py   --dataset lung --manifest manifests/lung.csv
-python  scripts/extract_asari.py --dataset lung --manifest manifests/lung.csv
-Rscript scripts/extract_xcms.R   lung manifests/lung.csv
-```
-
-### First-submission case studies
-
-`CaseStudy/` contains the original downstream analyses, one subfolder per dataset (milk /
-PABA, lung / silybin, COVID-19 / sphingosine and valine), each notebook alongside its
-feature tables. The milk and COVID-19 notebooks run out of the box; the lung notebook
-additionally needs the public [MTBLS6990](https://www.ebi.ac.uk/metabolights/MTBLS6990)
-ISA metadata files (`s_MTBLS6990.txt` and
-`a_MTBLS6990_LC-MS_untargeted_positive_reverse-phase_metabolite_profiling.txt`), resolved
-under `MINUT_DATA_DIR`.
-
-## License and citation
-
-MIT license. Please cite the paper (`CITATION.cff`). Team page: [LARTIC, Université Laval](https://lartic.fsaa.ulaval.ca/equipe).
+MIT license (see `LICENSE`). MINUT was developed in the [LARTIC](https://lartic.fsaa.ulaval.ca/equipe)
+team, Département des sciences des aliments, Université Laval.

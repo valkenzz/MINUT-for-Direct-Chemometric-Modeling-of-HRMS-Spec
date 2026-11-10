@@ -58,14 +58,27 @@ def minut(spectra, grid):
     return max_i, max_mz, max_rt
 
 
-def feature_vector(max_i, max_mz, max_rt, grid):
+def feature_vector(max_i, max_mz, max_rt, grid, normalization="max", tic=None):
     """Flatten to [intensity | m/z | RT], each block RT-major, all scaled to [0, 1].
 
-    Intensity is divided by the run maximum; m/z and RT are min-max scaled with the grid
+    Intensity is divided by the per-sample maximum (``normalization="max"``, the setting of the
+    article), by the total ion current of the binned scans (``"tic"``; ``tic`` must then be
+    given) or left as acquired (``"none"``); m/z and RT are min-max scaled with the grid
     limits so that every run shares the same coordinate frame. Empty bins are 0 everywhere.
+    The maximum normalization couples every descriptor to the dominant ion of the run; the
+    TIC variant is provided for cohorts where that ion differs between groups.
     """
     mz_min, mz_max, _, rt_min, rt_max, _ = grid
-    intensity = max_i / max_i.max() if max_i.max() > 0 else max_i
+    if normalization == "max":
+        intensity = max_i / max_i.max() if max_i.max() > 0 else max_i
+    elif normalization == "tic":
+        if tic is None or tic <= 0:
+            raise ValueError("normalization='tic' requires the total ion current of the run")
+        intensity = max_i / tic
+    elif normalization == "none":
+        intensity = max_i
+    else:
+        raise ValueError(f"unknown normalization {normalization!r}; use 'max', 'tic' or 'none'")
     mz = np.where(np.isnan(max_mz), mz_min, max_mz)
     rt = np.where(np.isnan(max_rt), rt_min, max_rt)
     return np.concatenate([
@@ -101,7 +114,15 @@ def read_spectra(path, ms_levels=(1,)):
         raise ValueError(f"expected an .mzML or .mzXML file, got {path.name}")
 
 
-def transform_file(path, grid, ms_levels=(1,)):
-    """MINUT feature vector of one run; see feature_vector for the layout."""
-    max_i, max_mz, max_rt = minut(read_spectra(path, ms_levels), grid)
-    return feature_vector(max_i, max_mz, max_rt, grid)
+def transform_file(path, grid, ms_levels=(1,), normalization="max"):
+    """MINUT feature vector of one run; see feature_vector for the layout and normalizations."""
+    tic = 0.0
+
+    def spectra():
+        nonlocal tic
+        for rt, mz, intensity in read_spectra(path, ms_levels):
+            tic += float(np.asarray(intensity, dtype=float).sum())
+            yield rt, mz, intensity
+
+    max_i, max_mz, max_rt = minut(spectra(), grid)
+    return feature_vector(max_i, max_mz, max_rt, grid, normalization=normalization, tic=tic)

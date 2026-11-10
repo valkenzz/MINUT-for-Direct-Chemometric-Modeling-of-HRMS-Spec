@@ -1,0 +1,6 @@
+problem,k_selected,n_train,n_test,cv_accuracy,cv_sd,test_accuracy,test_balanced_accuracy,test_macro_f1,test_auc_ovr,test_majority_baseline,confusion,classes,selected_descriptors,permutation_null_mean_balanced,permutation_null_max_balanced,permutation_p
+"3 classes healthy/TB/LC, k=7",8,122,214,0.876282,0.107572,0.682243,0.640212,0.558367,0.836340,0.411215,"[[0, 1, 62], [0, 58, 5], [0, 0, 88]]",healthy;TB;cancer,I[bin 603];I[bin 874];I[bin 1552];mz[bin 64];mz[bin 256];mz[bin 596];mz[bin 751];mz[bin 778],0.337383,0.475289,0.009901
+"3 classes healthy/TB/LC, k=50",51,122,214,0.917308,0.098620,0.855140,0.851010,0.852684,0.963438,0.411215,"[[42, 2, 19], [0, 63, 0], [10, 0, 78]]",healthy;TB;cancer,,,,
+"2 classes TB vs cancer, k=6 (7 bins)",7,85,151,1.000000,0.000000,1.000000,1.000000,1.000000,1.000000,0.582781,"[[63, 0], [0, 88]]",TB;cancer,,,,
+"2 classes healthy vs TB, k=6 (7 bins)",7,67,126,0.985714,0.042857,0.944444,0.944444,0.944357,0.996977,0.500000,"[[62, 1], [6, 57]]",healthy;TB,,,,
+"2 classes healthy vs cancer, k=6 (7 bins)",7,92,151,0.888889,0.131468,0.754967,0.726641,0.732231,0.886634,0.582781,"[[35, 28], [9, 79]]",healthy;cancer,,,,

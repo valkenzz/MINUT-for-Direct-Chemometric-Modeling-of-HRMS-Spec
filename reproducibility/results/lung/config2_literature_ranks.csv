@@ -1,0 +1,12 @@
+bin,compound,stable,gini_rank,auc_disc,auc_val,selected
+131,phenylalanylphenylalanine,True,7,0.901,0.773,False
+35,Phe immonium (in-source),True,19,0.844,0.78,False
+691,LysoPE 18:0,True,38,0.824,0.76,False
+662,C18:2-carnitine,True,12,0.848,0.813,True
+650,C16-carnitine,True,30,0.838,0.811,False
+663,C18:1-carnitine,True,34,0.771,0.8,False
+1059,anhydroretinol,True,17,0.893,0.664,False
+698,LPC 16:0,True,10,0.819,0.742,False
+710,LPC 18:2,True,25,0.824,0.694,False
+711,LPC 18:1,True,29,0.851,0.681,False
+734,LPC 22:6,True,39,0.807,0.821,False
