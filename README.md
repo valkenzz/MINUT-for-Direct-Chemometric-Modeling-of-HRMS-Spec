@@ -146,7 +146,7 @@ intensity by the per-sample maximum, m/z and RT by the grid limits. The milk tab
 |---|---|---|
 | `covid_0.5mz_1min.pkl` | m/z 100–700 by 0.5, RT 2–20 min by 1 | MetaboLights [MTBLS2291](https://www.ebi.ac.uk/metabolights/MTBLS2291) |
 | `lung_{10,2,0.5}mz_2min.pkl` | m/z 50–1000, RT 2–12 min by 2 | MetaboLights [MTBLS6990](https://www.ebi.ac.uk/metabolights/MTBLS6990) |
-| `milk_10mz.pkl` | m/z 100–1000 by 10, RT 2–16 min by 2 | TOFoo project (raw data on request to the corresponding author) |
+| `milk_10mz.pkl` | m/z 100–1000 by 10, RT 2–16 min by 2 | TOFoo project (raw data shared on request: ask for access to the [milk data folder](https://drive.google.com/drive/folders/1v_LGPiIyEIUdr4RPwQ7f1uwFL12Zngx9) or write to the corresponding author) |
 
 `covid_injections.csv` and `lung_injections.csv` list the public raw files (URL, SHA-256)
 with their subject, group or disease, cohort and batch; the loaders take the labels from them.
